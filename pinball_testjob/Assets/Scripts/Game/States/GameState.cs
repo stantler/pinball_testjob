@@ -7,16 +7,16 @@ namespace Game.States
     [State(StateType.Game)]
     public class GameState : IState
     {
-        public ScenarioController ScenarioController { get; private set; }
+        //public ScenarioController ScenarioController { get; private set; }
 
         public void Activate(Action callback)
         {
-            ScenarioController = new ScenarioController(callback);
+            //ScenarioController = new ScenarioController(callback);
         }
 
         public void Deactivate(Action callback)
         {
-            ScenarioController.Dispose();
+            //ScenarioController.Dispose();
             callback.SafeInvoke();
         }
 

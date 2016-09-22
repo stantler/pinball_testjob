@@ -19,12 +19,8 @@ namespace Kernel.Game.StateMachine
                 _statesByType.Add(s, GetInstance(s, args));
             }
 
-            //_.GUIManager.LoadingScreen.StartLoading(() =>
-            //{
-                CurrentState = firstState;
-                //_statesByType[CurrentState].Activate(() => { _.GUIManager.LoadingScreen.FinishLoading(null); });
+            CurrentState = firstState;
             _statesByType[CurrentState].Activate(null);
-            //});
         }
 
         public void SetState(T state, Action callback)

@@ -1,8 +1,9 @@
 ﻿using System;
-using DG.Tweening;
+using System.Collections;
 using GUI.Base;
 using Helpers.Extension;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace GUI.Loading
 {
@@ -12,9 +13,24 @@ namespace GUI.Loading
         private readonly Color _colorA0 = new Color(1f, 1f, 1f, 0f);
         private readonly Color _colorA1 = new Color(1f, 1f, 1f, 1f);
 
-        private const float Time = 0.25f;
+        private const float AnimationTime = 0.25f;
 
         public bool IsLoading { get; private set; }
+
+        private IEnumerator FadeCoroutine(Image image, Color to, float time, Action callback)
+        {
+            var from = image.color;
+            var t = time;
+            while (t > 0)
+            {
+                image.color = Color.Lerp(from, to, 1 - t / time);
+
+                t -= Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
+            image.color = to;
+            callback.SafeInvoke();
+        }
 
         public LoadingScreen(GUIManager guiManager, GameObject view) : base(guiManager, view)
         {
@@ -37,11 +53,11 @@ namespace GUI.Loading
 
             Informer.Loader.SetActive(false);
             Informer.Fader.color = _colorA0;
-            Informer.Fader.DOColor(_colorA1, Time).OnComplete(() =>
+            Informer.StartCoroutine(FadeCoroutine(Informer.Fader, _colorA1, AnimationTime, () =>
             {
                 Informer.Loader.SetActive(true);
                 callback.SafeInvoke();
-            });
+            }));
         }
 
         public void FinishLoading(Action callback)
@@ -55,11 +71,11 @@ namespace GUI.Loading
             IsLoading = false;
             Informer.Loader.SetActive(false);
             Informer.Fader.color = _colorA1;
-            Informer.Fader.DOColor(_colorA0, Time).OnComplete(() =>
+            Informer.StartCoroutine(FadeCoroutine(Informer.Fader, _colorA0, AnimationTime, () =>
             {
                 SetActive(false);
                 callback.SafeInvoke();
-            });
+            }));
         }
 
         public override void Dispose()

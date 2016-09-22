@@ -85,6 +85,7 @@ namespace GUI
 
         public void Dispose()
         {
+            DisposeScreen(LoadingScreen);
             LoadingScreen.Dispose();
             LoadingScreen = null;
 

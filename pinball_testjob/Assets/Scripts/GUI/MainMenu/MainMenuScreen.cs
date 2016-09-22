@@ -1,6 +1,4 @@
-﻿using DataProvider;
-using DataProvider.Entries;
-using GUI.Base;
+﻿using GUI.Base;
 using UnityEngine;
 
 namespace GUI.MainMenu
@@ -10,8 +8,8 @@ namespace GUI.MainMenu
     {
         public MainMenuScreen(GUIManager guiManager, GameObject view) : base(guiManager, view)
         {
-            Informer.StartGameButton.onClick.AddListener(_.GameController.StartGame);
-            Informer.LoadGameButton.onClick.AddListener(_.GameController.RestoreSession);
+            //Informer.StartGameButton.onClick.AddListener(_.GameController.StartGame);
+            //Informer.LoadGameButton.onClick.AddListener(_.GameController.RestoreSession);
 
             Informer.LoadingContainer.SetActive(true);
             Informer.StartGameButton.gameObject.SetActive(false);
@@ -28,13 +26,6 @@ namespace GUI.MainMenu
             {
                 Informer.LoadingContainer.SetActive(false);
                 Informer.StartGameButton.gameObject.SetActive(true);
-
-                ScenarioEntry entry;
-                if (SaveController.TryGetSavedScenario(out entry))
-                {
-                    Informer.LoadGameButtonText.text = string.Format("Продолжить кампанию\n\"{0}\"", entry.Name);
-                    Informer.LoadGameButton.gameObject.SetActive(true);
-                }
             }
         }
 
