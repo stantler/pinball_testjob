@@ -64,9 +64,9 @@ namespace Kernel.Game
         public void Initialize()
         {
 #if UNITY_EDITOR_WIN
-            _path = string.Format(@"file://{0}/../../../Resources/", Application.dataPath);
+            _path = string.Format(@"file://{0}/../../../files/", Application.dataPath);
 #else
-            _path = @"http://br_srv_00.destator.net:666/files/Resources/";
+            _path = @"https://github.com/stantler/pinball_testjob/tree/master/files";
 #endif
 
 #if UNITY_ANDROID
