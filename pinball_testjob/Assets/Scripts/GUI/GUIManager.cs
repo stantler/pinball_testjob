@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using GUI.Base;
 using GUI.Loading;
-using GUI.MessageBox;
 using Helpers.Extension;
 using Helpers.Modules;
 using UnityEngine;
@@ -19,7 +18,6 @@ namespace GUI
         public bool IsInitialized { get; set; }
 
         public LoadingScreen LoadingScreen { get; private set; }
-        public MessageBoxPanel MessageBoxPanel { get; private set; }
 
         private GameObject LoadContainer(Type type)
         {
@@ -79,7 +77,6 @@ namespace GUI
         public void Initialize()
         {
             LoadingScreen = InitializeComponent<LoadingScreen>();
-            MessageBoxPanel = InitializeComponent<MessageBoxPanel>();
             IsInitialized = true;
         }
 

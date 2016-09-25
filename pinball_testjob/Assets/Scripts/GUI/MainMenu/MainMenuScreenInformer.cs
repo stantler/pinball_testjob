@@ -6,5 +6,6 @@ namespace GUI.MainMenu
     public class MainMenuScreenInformer : MonoBehaviour
     {
         public Button StartGameButton;
+        public Dropdown SettingsDropdown;
     }
 }

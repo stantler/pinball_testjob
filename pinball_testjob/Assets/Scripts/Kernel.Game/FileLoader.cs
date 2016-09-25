@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Kernel.Game
 {
-    [Module(Dependecies = new Type[] { typeof(DataProvider) })]
+    [Module(Dependecies = new[] { typeof(DataProvider) })]
     public class FileLoader : MonoBehaviour, IModule
     {
         private const string Ext = ".u3d";
@@ -64,7 +64,7 @@ namespace Kernel.Game
         public void Initialize()
         {
 #if UNITY_EDITOR_WIN
-            _path = string.Format(@"file://{0}/../../../files/", Application.dataPath);
+            _path = string.Format(@"file://{0}/../../files/", Application.dataPath);
 #else
             _path = @"https://github.com/stantler/pinball_testjob/tree/master/files";
 #endif
@@ -74,6 +74,7 @@ namespace Kernel.Game
 #else
             _additionalPath = "P1/";
 #endif
+            IsInitialized = true;
         }
 
         public void LoadAsset<T>(int rmid, Action<T> callback) where T : class
@@ -83,7 +84,7 @@ namespace Kernel.Game
 
         public void Dispose()
         {
-
+            IsInitialized = false;
         }
     }
 }

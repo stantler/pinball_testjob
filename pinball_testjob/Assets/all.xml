@@ -2,8 +2,7 @@
   <paths>
     <path in="ball0" out="ball/ball0"/>
     <path in="ball1" out="ball/ball1"/>
-    <path in="bumper0" out="bumper/bumper0"/>
-    <path in="bumper1" out="bumper/bumper1"/>
-    <path in="bumper2" out="bumper/bumper2"/>
+    <path in="bounce0" out="bounce/bounce0"/>
+    <path in="bounce1" out="bounce/bounce1"/>
   </paths>
 </config>

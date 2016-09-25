@@ -1,14 +1,18 @@
-﻿using UnityEngine;
+﻿using Board.Behaviours;
+using UnityEngine;
 
 namespace Board
 {
     public class BoardInformer : MonoBehaviour
     {
         public Transform BallPoint;
+        public Transform BounceParent;
 
-        public HingeJoint PaddleLeft;
-        public HingeJoint PaddleRight;
+        public PeddleBehaviour PaddleLeft;
+        public PeddleBehaviour PaddleRight;
 
-        public Transform Pull;
+        public PullBehaviour Pull;
+
+        public BorderBehaviour Border;
     }
 }

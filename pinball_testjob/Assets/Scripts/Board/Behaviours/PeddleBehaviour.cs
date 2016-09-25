@@ -7,41 +7,42 @@ namespace Board.Behaviours
         private HingeJoint _hingeJoint;
         private JointSpring _spring;
 
-        public float restPosition = 0F;
-        public float pressedPosition = 45F;
-        public float flipperStrength = 10000F;
-        public float flipperDamper = 1F;
+        public float RestPosition = 0F;
+        public float PressedPosition = 60f;
+        public float FlipperStrength = 10000f;
+        public float FlipperDamper = 25f;
         public KeyCode Key = KeyCode.A;
 
-        private void Awaky()
+        private void Awake()
         {
             _hingeJoint = GetComponent<HingeJoint>();
 
             _spring = new JointSpring
             {
-                spring = flipperStrength,
-                damper = flipperDamper
+                spring = FlipperStrength,
+                damper = FlipperDamper
             };
 
             _hingeJoint.spring = _spring;
             _hingeJoint.useLimits = true;
-            _hingeJoint.limits = new JointLimits()
-            {
-                min = restPosition,
-                max = pressedPosition,
-            };
+
+            var jointLimits = _hingeJoint.limits;
+            jointLimits.min = RestPosition;
+            jointLimits.max = PressedPosition;
+            _hingeJoint.limits = jointLimits;
         }
 
-        private void Update()
+        public void UpdateInput(bool isPressed)
         {
-            if (Input.GetKey(Key))
+            if (isPressed)
             {
-                _spring.targetPosition = pressedPosition;
+                _spring.targetPosition = PressedPosition;
             }
             else
             {
-                _spring.targetPosition = restPosition;
+                _spring.targetPosition = RestPosition;
             }
+            _hingeJoint.spring = _spring;
         }
     }
 }
