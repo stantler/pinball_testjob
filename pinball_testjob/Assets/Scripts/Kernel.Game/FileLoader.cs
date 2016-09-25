@@ -38,12 +38,7 @@ namespace Kernel.Game
             else
             {
                 var url = FullPath + files[rmid] + Ext;
-
-#if UNITY_EDITOR
                 var www = new WWW(url);
-#else
-                var www = WWW.LoadFromCacheOrDownload(url, 0);
-#endif
                 yield return www;
 
                 if (!string.IsNullOrEmpty(www.error))
@@ -66,11 +61,11 @@ namespace Kernel.Game
 #if UNITY_EDITOR_WIN
             _path = string.Format(@"file://{0}/../../files/", Application.dataPath);
 #else
-            _path = @"https://github.com/stantler/pinball_testjob/tree/master/files";
+            _path = @"https://raw.githubusercontent.com/stantler/pinball_testjob/master/files/";
 #endif
 
 #if UNITY_ANDROID
-			_additionalPath = "P0/";
+            _additionalPath = "P0/";
 #else
             _additionalPath = "P1/";
 #endif
